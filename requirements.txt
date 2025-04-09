@@ -9,3 +9,4 @@ torch
 transformers
 Flask-WTF
 WTForms
+gunicorn
