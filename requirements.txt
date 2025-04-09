@@ -2,15 +2,6 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-arm64
 # created-by: conda 24.11.3
-aext-assistant=4.0.15=py312hca03da5_jl4_0
-aext-assistant-server=4.0.15=py312hca03da5_0
-aext-core=4.0.15=py312hca03da5_jl4_0
-aext-core-server=4.0.15=py312hca03da5_1
-aext-panels=4.0.15=py312hca03da5_0
-aext-panels-server=4.0.15=py312hca03da5_0
-aext-share-notebook=4.0.15=py312hca03da5_0
-aext-share-notebook-server=4.0.15=py312hca03da5_0
-aext-shared=4.0.15=py312hca03da5_0
 aiobotocore=2.12.3=py312hca03da5_0
 aiohappyeyeballs=2.4.0=py312hca03da5_0
 aiohttp=3.10.5=py312h80987f9_0
