@@ -2,7 +2,6 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-arm64
 # created-by: conda 24.11.3
-_anaconda_depends=2024.10=py312_openblas_0
 absl-py=2.1.0=pypi_0
 ace-tools=0.0=pypi_0
 aext-assistant=4.0.15=py312hca03da5_jl4_0
@@ -22,13 +21,6 @@ aiosignal=1.2.0=pyhd3eb1b0_0
 alabaster=0.7.16=py312hca03da5_0
 alpha-vantage=3.0.0=pypi_0
 altair=5.0.1=py312hca03da5_0
-anaconda-anon-usage=0.4.4=py312hd6b623d_100
-anaconda-catalogs=0.2.0=py312hca03da5_1
-anaconda-client=1.12.3=py312hca03da5_0
-anaconda-cloud-auth=0.5.1=py312hca03da5_0
-anaconda-navigator=2.6.3=py312hca03da5_0
-anaconda-project=0.11.1=py312hca03da5_0
-anaconda-toolbox=4.0.15=py312hca03da5_0
 annotated-types=0.6.0=py312hca03da5_0
 anyio=4.2.0=py312hca03da5_0
 aom=3.6.0=h313beb8_0
@@ -180,7 +172,6 @@ grpcio=1.71.0=pypi_0
 grpcio-status=1.71.0=pypi_0
 gst-plugins-base=1.14.1=h313beb8_1
 gstreamer=1.14.1=h80987f9_1
-gurobi=12.0.0=py312_0
 h11=0.14.0=py312hca03da5_0
 h5py=3.11.0=py312haac6407_0
 hdf5=1.12.1=h05c076b_3
