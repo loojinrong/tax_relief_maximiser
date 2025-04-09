@@ -1,0 +1,18 @@
+.savings-details {
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.rationale {
+    max-width: 400px;
+    white-space: pre-wrap;
+}
+
+.table-responsive {
+    margin-bottom: 2rem;
+}
+
+.alert ul li {
+    margin-bottom: 1rem;
+} 

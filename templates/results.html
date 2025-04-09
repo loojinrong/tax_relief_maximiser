@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center mb-4">
+        <h1 class="display-6 fw-bold mb-3">Your Tax Analysis</h1>
+        <p class="lead text-muted">Here's a detailed breakdown of your tax situation and potential savings opportunities.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-cash-stack text-primary display-4 mb-3"></i>
+                    <h3 class="h5 mb-3">Total Income</h3>
+                    <p class="display-6 fw-bold mb-0">${{ "%.2f"|format(total_income) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-graph-up text-primary display-4 mb-3"></i>
+                    <h3 class="h5 mb-3">Assessable Income</h3>
+                    <p class="display-6 fw-bold mb-0">${{ "%.2f"|format(assessable_income) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-shield-check text-primary display-4 mb-3"></i>
+                    <h3 class="h5 mb-3">Total Reliefs</h3>
+                    <p class="display-6 fw-bold mb-0">${{ "%.2f"|format(total_reliefs) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-header bg-white py-3">
+            <h2 class="h4 mb-0">Tax Relief Breakdown</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Relief Type</th>
+                            <th class="text-end">Amount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Earned Income Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(earned_income_relief) }}</td>
+                            <td>Basic relief for earning employment income</td>
+                        </tr>
+                        <tr>
+                            <td>Parent Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(parent_relief) }}</td>
+                            <td>Relief for supporting parents/grandparents</td>
+                        </tr>
+                        <tr>
+                            <td>Child Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(child_relief) }}</td>
+                            <td>Relief for qualifying children</td>
+                        </tr>
+                        <tr>
+                            <td>Working Mother Child Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(working_mother_relief) }}</td>
+                            <td>Additional relief for working mothers</td>
+                        </tr>
+                        <tr>
+                            <td>CPF Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(cpf_relief) }}</td>
+                            <td>Relief for CPF contributions</td>
+                        </tr>
+                        <tr>
+                            <td>SRS Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(srs_relief) }}</td>
+                            <td>Relief for SRS contributions</td>
+                        </tr>
+                        <tr>
+                            <td>Course Fee Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(course_fee_relief) }}</td>
+                            <td>Relief for approved course fees</td>
+                        </tr>
+                        <tr>
+                            <td>NSman Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(nsman_relief) }}</td>
+                            <td>Relief for NS service</td>
+                        </tr>
+                        <tr>
+                            <td>Donation Relief</td>
+                            <td class="text-end">${{ "%.2f"|format(donation_relief) }}</td>
+                            <td>Relief for approved donations (2.5x of donation amount)</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <td><strong>Total Relief</strong></td>
+                            <td class="text-end"><strong>${{ "%.2f"|format(total_reliefs) }}</strong></td>
+                            <td><em>Maximum relief cap: $80,000</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4">
+                <h4 class="mb-3">Relief Utilization</h4>
+                {% set relief_percentage = (total_reliefs / 80000.0 * 100)|float|round(2) %}
+                <div class="progress mb-2" style="height: 1rem;">
+                    <div class="progress-bar bg-primary" role="progressbar" 
+                         style="width: {{ relief_percentage }}%"
+                         aria-valuenow="{{ relief_percentage }}"
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        {{ relief_percentage }}%
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between text-muted small">
+                    <span>Used: ${{ "%.2f"|format(total_reliefs) }}</span>
+                    <span>Available: ${{ "%.2f"|format(80000 - total_reliefs) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-header bg-white py-3">
+            <h2 class="h4 mb-0">AI-Recommended Tax-Saving Strategies</h2>
+        </div>
+        <div class="card-body">
+            {% if recommended %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Strategy</th>
+                                <th class="text-end">Suggested Amount</th>
+                                <th>Benefits & Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in recommended %}
+                            <tr>
+                                <td>{{ item['Relief Name'] }}</td>
+                                <td class="text-end">${{ "%.2f"|format(item['Suggested Amount']) }}</td>
+                                <td>{{ item['Rationale'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert alert-primary mt-4">
+                    <h4 class="alert-heading">Potential Savings Summary</h4>
+                    <div class="row g-4 mt-3">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <p class="text-muted mb-1">Current Tax Payable</p>
+                                <h3 class="h4 mb-0">${{ "%.2f"|format(tax_payable) }}</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <p class="text-muted mb-1">Potential New Tax Payable</p>
+                                <h3 class="h4 mb-0">${{ "%.2f"|format(new_tax) }}</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <p class="text-muted mb-1">Potential Savings</p>
+                                <h3 class="h4 text-success mb-0">${{ "%.2f"|format(tax_payable - new_tax) }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">You're Already Optimized!</h4>
+                    <p>Based on your current income and reliefs, you are already optimizing your tax position. However, consider these general tips for future tax planning:</p>
+                    <ul class="mb-0">
+                        <li>Consider making CPF top-ups for retirement planning and tax benefits</li>
+                        <li>Look into approved charitable donations for both social impact and tax relief</li>
+                        <li>Explore upskilling opportunities that qualify for Course Fee Relief</li>
+                        <li>Consider opening an SRS account for additional retirement savings and tax benefits</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+            <i class="bi bi-house-fill me-2"></i>Return to Home
+        </a>
+    </div>
+</div>
+{% endblock %}
