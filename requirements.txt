@@ -2,13 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-arm64
 # created-by: conda 24.11.3
-aiobotocore=2.12.3=py312hca03da5_0
-aiohappyeyeballs=2.4.0=py312hca03da5_0
-aiohttp=3.10.5=py312h80987f9_0
-aioitertools=0.7.1=pyhd3eb1b0_0
-aiosignal=1.2.0=pyhd3eb1b0_0
 alabaster=0.7.16=py312hca03da5_0
-alpha-vantage=3.0.0=pypi_0
 altair=5.0.1=py312hca03da5_0
 annotated-types=0.6.0=py312hca03da5_0
 anyio=4.2.0=py312hca03da5_0
