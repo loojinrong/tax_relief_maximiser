@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.secret_key = '457314cbd7778d17f1795670862ab03f160afceb01772b43fe658f1ba0d4c6c5'  # Secure secret key for session encryption
 
 # Set your OpenAI API key (ensure it's set in your environment variables)
-openai.api_key = os.getenv("/etc/secrets/OPENAI_API_KEY")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize the model and tokenizer
 tokenizer, model = None, None
