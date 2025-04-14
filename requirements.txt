@@ -2,6 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-arm64
 # created-by: conda 24.11.3
+gunicorn
 Flask
 openai
 python-dotenv
