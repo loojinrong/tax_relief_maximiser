@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block progress %}
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">Step 3 of 5</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <h2>Income Information</h2>
+    <form method="POST" action="{{ url_for('income_questions') }}" class="needs-validation" novalidate>
+        {{ form.csrf_token }}
+        
+        <div class="mb-3">
+            {{ form.employment_income.label(class="form-label") }}
+            {{ form.employment_income(class="form-control") }}
+            {% if form.employment_income.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.employment_income.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Including salaries, bonuses, director's fees, commission, fixed allowances and any benefits in kind.
+                DO NOT deduct CPF paid when you key in this figure.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.employment_expenses.label(class="form-label") }}
+            {{ form.employment_expenses(class="form-control") }}
+            {% if form.employment_expenses.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.employment_expenses.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Employment expenses are expenses that are 'wholly and exclusively' incurred in the production of your employment income in Singapore.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.trade_business_income.label(class="form-label") }}
+            {{ form.trade_business_income(class="form-control") }}
+            {% if form.trade_business_income.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.trade_business_income.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Enter your Trade, Business, Profession, Vocation Income Adjusted Profit (+ve)/Loss (-ve).
+            </div>
+        </div>
+
+        <h3 class="mt-4">Other Income</h3>
+
+        <div class="mb-3">
+            {{ form.dividends.label(class="form-label") }}
+            {{ form.dividends(class="form-control") }}
+            {% if form.dividends.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.dividends.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Taxable dividends include those paid by Co-operatives, foreign dividends received through partnership,
+                and income distribution from REITs.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.interest.label(class="form-label") }}
+            {{ form.interest(class="form-control") }}
+            {% if form.interest.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.interest.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Enter your interest income received in the previous year if it is NOT from deposits with approved banks
+                or licensed finance companies in Singapore.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.rent.label(class="form-label") }}
+            {{ form.rent(class="form-control") }}
+            {% if form.rent.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.rent.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Enter your net rent (Rent Income - Rent Expense) from property in the previous year.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.approved_donations.label(class="form-label") }}
+            {{ form.approved_donations(class="form-control") }}
+            {% if form.approved_donations.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.approved_donations.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="info-text">
+                Enter the amount donated to approved Institution of Public Character (IPC) in the previous year.
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            {% if session.get('num_children', 0) > 0 %}
+                <a href="{{ url_for('children_info') }}" class="btn btn-secondary">Back</a>
+            {% else %}
+                <a href="{{ url_for('general_questions') }}" class="btn btn-secondary">Back</a>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

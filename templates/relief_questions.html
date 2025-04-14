@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block progress %}
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Step 4 of 5</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <h2>Relief Information</h2>
+    <form method="POST" action="{{ url_for('relief_questions') }}">
+        {{ form.csrf_token }}
+        
+        <h3 class="mt-4">Parent Relief</h3>
+        <div class="mb-3">
+            {{ form.parent_relief_type.label(class="form-label") }}
+            {{ form.parent_relief_type(class="form-select") }}
+            <div class="info-text">
+                Select the type of parent relief you are claiming. This includes relief for supporting your parents,
+                grandparents, or great-grandparents who are living in Singapore.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.num_parent_dependents.label(class="form-label") }}
+            {{ form.num_parent_dependents(class="form-control") }}
+            <div class="info-text">
+                Enter the number of parent dependents you are supporting (maximum 2).
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.parent_living_with_you.label(class="form-label") }}
+            {{ form.parent_living_with_you(class="form-select") }}
+            <div class="info-text">
+                Indicate whether your parents are living with you, as this affects the relief amount.
+            </div>
+        </div>
+
+        <h3 class="mt-4">CPF Contributions</h3>
+        <div class="mb-3">
+            {{ form.cpf_contributions.label(class="form-label") }}
+            {{ form.cpf_contributions(class="form-control") }}
+            <div class="info-text">
+                Enter your total CPF contributions for the year, including both employee and employer contributions.
+            </div>
+        </div>
+
+        <h3 class="mt-4">Self Top-Up CPF</h3>
+        <div class="mb-3">
+            {{ form.self_top_up_cpf.label(class="form-label") }}
+            {{ form.self_top_up_cpf(class="form-control") }}
+            <div class="info-text">
+                Enter your voluntary CPF top-up amount for yourself or others (including for life insurance) with a limit of $8,000.
+            </div>
+        </div>
+
+        <h3 class="mt-4">SRS Contributions</h3>
+        <div class="mb-3">
+            {{ form.srs_contributions.label(class="form-label") }}
+            {{ form.srs_contributions(class="form-control") }}
+            <div class="info-text">
+                Enter your Supplementary Retirement Scheme (SRS) contributions for the year.
+            </div>
+        </div>
+
+        <h3 class="mt-4">Course Fees</h3>
+        <div class="mb-3">
+            {{ form.course_fees.label(class="form-label") }}
+            {{ form.course_fees(class="form-control") }}
+            <div class="info-text">
+                Enter the amount of course fees paid for approved courses, seminars, and conferences.
+            </div>
+        </div>
+
+        <h3 class="mt-4">NSman Relief</h3>
+        <div class="mb-3">
+            {{ form.nsman_type.label(class="form-label") }}
+            {{ form.nsman_type(class="form-select") }}
+            <div class="info-text">
+                Select the type of NSman relief you are claiming (Self, Wife, or Parent).
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.performed_ns.label(class="form-label") }}
+            {{ form.performed_ns(class="form-select") }}
+            <div class="info-text">
+                Indicate whether you performed NS activities in the year.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.is_key_appointment.label(class="form-label") }}
+            {{ form.is_key_appointment(class="form-select") }}
+            <div class="info-text">
+                Indicate whether you are a NS key command and staff appointment holder.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate Tax</button>
+    </form>
+</div>
+{% endblock %}
