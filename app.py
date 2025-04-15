@@ -315,7 +315,15 @@ def index():
 @app.route('/general-questions', methods=['GET', 'POST'])
 def general_questions():
     form = GeneralInfoForm()
+    if request.method == 'POST':
+        print("Form submitted")
+        print("Form data:", request.form)
+        print("Form validation:", form.validate())
+        if not form.validate():
+            print("Form errors:", form.errors)
+    
     if form.validate_on_submit():
+        print("Form validated successfully")
         session['citizenship'] = form.citizenship.data
         session['gender'] = form.gender.data
         session['marital_status'] = form.marital_status.data
@@ -502,7 +510,9 @@ def results():
         'cpf_relief': cpf_relief,
         'srs_relief': srs_relief,
         'course_fee_relief': course_fee_relief,
-        'chargeable_income': chargeable_income
+        'chargeable_income': chargeable_income,
+        'self_top_up_cpf': session.get('self_top_up_cpf', 0),
+        'total_reliefs': total_reliefs
     }
     
     recommended = ai_generate_recommendations_openai(user_data)
