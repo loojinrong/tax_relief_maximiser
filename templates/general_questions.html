@@ -18,10 +18,16 @@
     <form method="POST" action="{{ url_for('general_questions') }}" class="needs-validation" novalidate>
         {{ form.csrf_token }}
         
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            Please correct the errors below.
+        </div>
+        {% endif %}
+        
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.citizenship(class="form-select") }}
+                    {{ form.citizenship(class="form-select" + (" is-invalid" if form.citizenship.errors else "")) }}
                     {{ form.citizenship.label(class="form-label") }}
                     {% if form.citizenship.errors %}
                         <div class="invalid-feedback">
@@ -39,7 +45,7 @@
 
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.gender(class="form-select") }}
+                    {{ form.gender(class="form-select" + (" is-invalid" if form.gender.errors else "")) }}
                     {{ form.gender.label(class="form-label") }}
                     {% if form.gender.errors %}
                         <div class="invalid-feedback">
@@ -57,7 +63,7 @@
 
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.marital_status(class="form-select") }}
+                    {{ form.marital_status(class="form-select" + (" is-invalid" if form.marital_status.errors else "")) }}
                     {{ form.marital_status.label(class="form-label") }}
                     {% if form.marital_status.errors %}
                         <div class="invalid-feedback">
@@ -75,7 +81,7 @@
 
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.age_2025(class="form-control", placeholder=" ") }}
+                    {{ form.age_2025(class="form-control" + (" is-invalid" if form.age_2025.errors else ""), placeholder=" ") }}
                     {{ form.age_2025.label(class="form-label") }}
                     {% if form.age_2025.errors %}
                         <div class="invalid-feedback">
@@ -93,7 +99,7 @@
 
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.disability(class="form-select") }}
+                    {{ form.disability(class="form-select" + (" is-invalid" if form.disability.errors else "")) }}
                     {{ form.disability.label(class="form-label") }}
                     {% if form.disability.errors %}
                         <div class="invalid-feedback">
@@ -111,7 +117,7 @@
 
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    {{ form.num_children(class="form-control", placeholder=" ") }}
+                    {{ form.num_children(class="form-control" + (" is-invalid" if form.num_children.errors else ""), placeholder=" ") }}
                     {{ form.num_children.label(class="form-label") }}
                     {% if form.num_children.errors %}
                         <div class="invalid-feedback">
@@ -123,6 +129,24 @@
                     <div class="info-text">
                         <i class="bi bi-info-circle me-1"></i>
                         Number of children affects eligibility for various child-related reliefs.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    {{ form.num_handicapped_children(class="form-control" + (" is-invalid" if form.num_handicapped_children.errors else ""), placeholder=" ") }}
+                    {{ form.num_handicapped_children.label(class="form-label") }}
+                    {% if form.num_handicapped_children.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.num_handicapped_children.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="info-text">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Number of handicapped children affects the amount of child relief you can claim.
                     </div>
                 </div>
             </div>
